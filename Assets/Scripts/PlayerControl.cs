@@ -58,6 +58,7 @@ public class PlayerControl : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        Debug.Log( collider.name);
         if (collider.tag != "Buff" && shieldOfShip.shieldLayers <= 0)
         {
             if (stun <= 0)

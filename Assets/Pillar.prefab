@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7967683065022760226}
   - component: {fileID: 4689740744497800724}
   - component: {fileID: 4686514074414443727}
+  - component: {fileID: 8244190087740082532}
+  - component: {fileID: 5217126651449148350}
   m_Layer: 9
   m_Name: Pillar
   m_TagString: Untagged
@@ -87,7 +89,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300840557915486718}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -101,8 +103,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 300840557915486718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: a01c837e3de4f7e4aa88c96d5725a65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5
+--- !u!114 &8244190087740082532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300840557915486718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e8e21d165903d438edd295f98f16f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0, z: -100}
+--- !u!114 &5217126651449148350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300840557915486718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79179367064aa4348aa572beb44ba6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
