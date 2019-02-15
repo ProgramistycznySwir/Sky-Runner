@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Pillar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Tooltip("Spawned after pillar was hitted")]
+    public GameObject pillarDummy;
+
+    public void Hit()
     {
-        
+        Debug.Log("Hitted");
+        GameObject newDummy = Instantiate(pillarDummy, transform.position, transform.rotation);
+        newDummy.transform.localScale = transform.localScale;
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

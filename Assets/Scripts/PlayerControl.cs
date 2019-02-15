@@ -59,16 +59,15 @@ public class PlayerControl : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         Debug.Log( collider.name);
-        if (collider.tag != "Buff" && shieldOfShip.shieldLayers <= 0)
+        if (collider.tag != "Buff")
         {
             if (stun <= 0)
             {
                 hitCount++;
                 hitCountText.text = System.Convert.ToString(hitCount);
-                Destroy(collider, 0.1f);
+                collider.GetComponentInParent<Pillar>().Hit();
                 Stun();
             }
-            Instantiate(HitEffect, collider.transform.position, new Quaternion(0, 0, 0, 0));
         }
     }
 
