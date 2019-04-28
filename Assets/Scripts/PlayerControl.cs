@@ -41,7 +41,7 @@ public class PlayerControl : MonoBehaviour
     public new Rigidbody rigidbody;
     public new Transform camera;
     int hitCount = 0;
-    public UnityEngine.UI.Text hitCountText;
+    public TextMesh hitCountText;
     public GameObject HitEffect;
     PlayerControl playerControl;
     public Shield shieldOfShip;
