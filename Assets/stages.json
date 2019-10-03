@@ -1,0 +1,112 @@
+{
+    "stages": [
+        {
+            "name": "Basic",
+            "chanceOccuring":10,
+            "obstacles": [
+                {
+                    "name": "Pillar",
+                    "ID": 0,
+                    "cooldown": 4,
+                    "varySize": true
+                }
+            ],
+			"lightData": {
+                "sunLightIntensity": 1.0,
+                "sunLightColor": [1.0, 0.9892683, 0.96],
+                "ambientIntensity": 0.5
+            },
+            "lenghtRange": [3000.0, 5000.0]
+        },
+        {
+            "name": "Land Mills",
+            "chanceOccuring": 5,
+            "obstacles": [
+                {
+                    "name": "Pillar",
+                    "ID": 0,
+                    "cooldown": 5,
+                    "varySize": true
+                },
+                {
+                    "name": "Rotor",
+                    "ID": 1,
+                    "cooldown": 20,
+                    "varySize": false
+                }
+            ],
+			"lightData": {
+                "sunLightIntensity": 1.0,
+                "sunLightColor": [1.0, 0.9892683, 0.96],
+                "ambientIntensity": 0.5
+            },
+            "lenghtRange": [3000.0, 5000.0]
+        },
+        {
+            "name": "Land Mills II",
+            "chanceOccuring": 5,
+            "obstacles": [
+				{
+                    "name": "Pillar",
+                    "ID": 0,
+                    "cooldown": 10,
+                    "varySize": true
+                },
+				{
+                    "name": "Rotor",
+                    "ID": 1,
+                    "cooldown": 25,
+                    "varySize": false
+                },
+				{
+                    "name": "MonoBlade",
+                    "ID": 2,
+                    "cooldown": 25,
+                    "varySize": false
+                }
+			],
+			"lightData": {
+                "sunLightIntensity": 1.0,
+                "sunLightColor": [1.0, 0.9892683, 0.96],
+                "ambientIntensity": 0.5
+            },
+            "lenghtRange": [3000.0, 5000.0]
+        },
+		{
+            "name": "Crystal Mines",
+            "chanceOccuring": 3,
+            "obstacles": [
+				{
+                    "name": "CrystalSpike",
+                    "ID": 3,
+                    "cooldown": 3,
+                    "varySize": true
+                }
+			],
+			"lightData": {
+                "sunLightIntensity": 0.0,
+                "sunLightColor": [1.0, 0.9892683, 0.96],
+                "ambientIntensity": 0.0
+            },
+            "lenghtRange": [3000.0, 5000.0]
+        },
+		{
+            "name": "Crimson",
+            "chanceOccuring": 0,
+            "obstacles": [
+				{
+                    "name": "CrimsonCube",
+                    "ID": 4,
+                    "cooldown": 3,
+                    "varySize": true
+                }
+			],
+			"lightData": {
+                "sunLightIntensity": 0.0,
+                "sunLightColor": [1.0, 0.9892683, 0.96],
+                "ambientIntensity": 0.0
+            },
+            "lenghtRange": [3000.0, 5000.0]
+        }
+    ]
+}

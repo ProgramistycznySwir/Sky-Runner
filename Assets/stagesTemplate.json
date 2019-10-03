@@ -1,0 +1,67 @@
+{
+    "stages": [
+        {
+            "name": "",
+            "chanceOccuring": 0,
+            "obstacles": [
+                {
+                    "name": "",
+                    "ID": 0,
+                    "cooldown": 0,
+                    "varySize": false
+                },
+                {
+                    "name": "",
+                    "ID": 0,
+                    "cooldown": 0,
+                    "varySize": false
+                },
+                {
+                    "name": "",
+                    "ID": 0,
+                    "cooldown": 0,
+                    "varySize": false
+                }
+            ],
+            "lightData": {
+                "sunLightIntensity": 0.0,
+                "sunLightColor": [],
+                "ambientIntensity": 0.0
+            },
+            "lenghtRange": []
+        },
+        {
+            "name": "",
+            "chanceOccuring": 0,
+            "obstacles": [],
+            "lightData": {
+                "sunLightIntensity": 0.0,
+                "sunLightColor": [],
+                "ambientIntensity": 0.0
+            },
+            "lenghtRange": []
+        },
+        {
+            "name": "",
+            "chanceOccuring": 0,
+            "obstacles": [],
+            "lightData": {
+                "sunLightIntensity": 0.0,
+                "sunLightColor": [],
+                "ambientIntensity": 0.0
+            },
+            "lenghtRange": []
+        },
+        {
+            "name": "",
+            "chanceOccuring": 0,
+            "obstacles": [],
+            "lightData": {
+                "sunLightIntensity": 0.0,
+                "sunLightColor": [],
+                "ambientIntensity": 0.0
+            },
+            "lenghtRange": []
+        }
+    ]
+}

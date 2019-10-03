@@ -41,33 +41,33 @@ public class PlayerControl : MonoBehaviour
     public new Rigidbody rigidbody;
     public new Transform camera;
     int hitCount = 0;
-    public TextMesh hitCountText;
-    public GameObject HitEffect;
-    PlayerControl playerControl;
+    public TMPro.TextMeshPro hitCountText;
+    public GameObject hitEffect;
+    public MasterShipColor masterShipColor;
+    //PlayerControl playerControl;
     public Shield shieldOfShip;
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.tag != "walls" || collision.collider.tag != "Buff")
-        {
-            rigidbody.drag = 0f;
-            rigidbody.angularDrag = 0f;
-            playerControl.enabled = false;
-        }
-    }
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.collider.tag != "walls" || collision.collider.tag != "Buff")
+    //    {
+    //        rigidbody.drag = 0f;
+    //        rigidbody.angularDrag = 0f;
+    //        playerControl.enabled = false;
+    //    }
+    //}
 
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log( collider.name);
+        //Debug.Log( collider.name);
         if (collider.tag != "Buff")
         {
-            if (stun <= 0)
-            {
-                hitCount++;
-                hitCountText.text = System.Convert.ToString(hitCount);
-                collider.GetComponentInParent<Pillar>().Hit();
-                Stun();
-            }
+            hitCount++;
+            hitCountText.text = System.Convert.ToString(hitCount);
+
+            Instantiate(hitEffect, transform.position + Vector3.forward * 10f, Quaternion.identity).GetComponent<Light>().color = masterShipColor.shipColor;
+
+            //collider.GetComponentInParent<Pillar>().Hit();
         }
     }
 
@@ -82,12 +82,13 @@ public class PlayerControl : MonoBehaviour
         {
             rigidbody = gameObject.GetComponent<Rigidbody>();
         }
-        playerControl = gameObject.GetComponent<PlayerControl>();
+        //playerControl = gameObject.GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        #region >>> Side Ways Movement <<<
         if (customControl)
         {
             if (Input.GetKey(right))
@@ -147,19 +148,10 @@ public class PlayerControl : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, roll);
 
         if(rollCamera) camera.eulerAngles = new Vector3(0, -roll * 0.25f, 0);
+        #endregion
+        
 
-
-        if (runStarted)
-        {
-            runnerSpeed += acceleration * Time.deltaTime;
-            rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, runnerSpeed);            
-        }
-        else if (Input.GetKeyDown(startRun))
-        {
-            StartRun();
-            runStarted = true;
-        }
-
+        //limits the movement of shit soo it don't touch boundaries, couse touching boundaries is no no
         if (transform.position.x > limitHorizontalMovement.y) transform.position = new Vector3(limitHorizontalMovement.y, 0, transform.position.z);
         else if (transform.position.x < limitHorizontalMovement.x) transform.position = new Vector3(limitHorizontalMovement.x, 0, transform.position.z);
 
@@ -167,23 +159,8 @@ public class PlayerControl : MonoBehaviour
         {
             stun--;
         }
-
-        //if (rollDeadSpace <= Input.GetAxis("Horizontal") && -rollingMaxAngle <= roll) //Rolling Right
-        //{
-        //    Debug.Log(">>> Doin' my part!");
-        //    roll -= rollingSpeedPerSecond * Time.deltaTime;
-        //    //transform.eulerAngles += new Vector3(0, 0, transform.eulerAngles.z - rollingSpeedPerSecond * Time.deltaTime);
-        //}
-        //else if (-rollDeadSpace >= Input.GetAxis("Horizontal") && rollingMaxAngle >= roll) //Rolling Left
-        //{
-        //    roll += rollingSpeedPerSecond * Time.deltaTime;
-        //}
     }
 
-    private void StartRun()
-    {
-        runnerSpeed = initialSpeed;
-    }
     public void Stun()
     {
         stun = stunThreshold;

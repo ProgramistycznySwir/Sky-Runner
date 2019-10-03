@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class MasterShipColor : MonoBehaviour
 {
     public Color shipColor;
     public float hullValue = 0.5f;
     public Renderer[] hull;
-    public TextMesh[] texts;
+    public TextMeshPro[] texts;
     public TrailRenderer[] trails;
     
     void Start()
