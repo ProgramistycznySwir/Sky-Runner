@@ -2,8 +2,8 @@
 
 public class PlayerControl : MonoBehaviour
 {
-    public float horizontalForce = 50f;
-    public float maxHorizontalSpeed = 30f;
+    public float horizontalForce = 50f; //300
+    public float maxHorizontalSpeed = 30f; //150
     //public float rollDeadSpace = 0.1f;
     //public float rollingMaxAngle = 20f;
     //public float rollingSpeedPerSecond = 10f;

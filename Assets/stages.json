@@ -90,6 +90,30 @@
             },
             "lenghtRange": [3000.0, 5000.0]
         },
+        {
+            "name": "Walls' Valley",
+            "chanceOccuring": 15,
+            "obstacles": [
+				{
+                    "name": "Pillar",
+                    "ID": 0,
+                    "cooldown": 10,
+                    "varySize": true
+                },
+                {
+                    "name": "Marching Wall",
+                    "ID": 6,
+                    "cooldown": 20,
+                    "varySize": true
+                }
+			],
+			"lightData": {
+                "sunLightIntensity": 1.5,
+                "sunLightColor": [1.0, 0.9892683, 0.96],
+                "ambientIntensity": 0.5
+            },
+            "lenghtRange": [3000.0, 5000.0]
+        },
 		{
             "name": "Crimson",
             "chanceOccuring": 0,
