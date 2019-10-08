@@ -7,6 +7,8 @@ public class Obstacle_CrystalSpike : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position += Vector3.up * (GameRules.bottomHeight - 5);
+
         Color color = Color.HSVToRGB(Random.value, 1, 1);
         color.a = 0.7f;
         renderer.material.color = color;

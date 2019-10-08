@@ -1,18 +1,11 @@
 ﻿using UnityEngine;
 using System.IO;
 
-public class CreateObstacles_v2 : MonoBehaviour
+public class ObstacleSpawner : MonoBehaviour
 {
     #region >>> Variables <<<
-
-    public float distanceInFront = 200f;
-    public float naboki = 200f;
-
+    
     int[] cooldowns;
-
-    public bool multiplayer = false;
-
-    public Vector2 heightOfObstacles = new Vector2(50f, 50f);
 
     public float currentStageDistanceTravelled;
     public float currentStageLenght;
@@ -39,42 +32,29 @@ public class CreateObstacles_v2 : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        //CreateTemplateFile();
+        CreateTemplateFile();
         LoadData();
         ChooseRandomStage();
     }
 
-    // Update is called once per frame
+    // Update is called once per physics frame
     void FixedUpdate()
     {
-        //if (multiplayer)
-        //{
-        //    transform.position = new Vector3(0,0,player.position.z);
-        //}
         for (int i = 0; i < currentStage.obstacles.Length; i++)
         {
             if (cooldowns[i] <= 0)
             {
-                GameObject newObstacle = Instantiate(obstacles[currentStage.obstacles[i].ID], new Vector3(Random.Range(-naboki, naboki), -50, distanceInFront), Quaternion.identity);
-                if (currentStage.obstacles[i].varySize) newObstacle.transform.localScale = new Vector3(newObstacle.transform.localScale.x, Random.Range(heightOfObstacles.x, heightOfObstacles.y), newObstacle.transform.localScale.z);
-                cooldowns[i] = currentStage.obstacles[i].cooldown;
+                GameObject newObstacle = Instantiate(obstacles[currentStage.obstacles[i].ID], new Vector3(Random.Range(GameRules.wallsPositions.x, GameRules.wallsPositions.y), 0, GameRules.obstacleSpawnDistance), Quaternion.identity);
+                cooldowns[i] = (int)((float)currentStage.obstacles[i].cooldown / GameRules.obstacleSpawnMultiplier);
             }
             else cooldowns[i]--;
         }
-
-        //if (cooldownBuffs <= 0)
-        //{
-        //    Instantiate(buffs[Random.Range(0, buffs.Length - 1)], new Vector3(Random.Range(-naboki, naboki), 0, transform.position.z + distanceInFront), new Quaternion(0, 0, 0, 0));
-        //    cooldownBuffs = waitBuffs;
-        //}
-        //else cooldownBuffs--;
-
         if (Input.GetKeyDown(KeyCode.Space)) ChooseRandomStage();
     }
 
     #endregion
 
-    #region >>> Data Manageing <<<
+    #region >>> Data Management <<<
 
     public void CreateTemplateFile()
     {
@@ -85,7 +65,6 @@ public class CreateObstacles_v2 : MonoBehaviour
         stagesData.stages[0].obstacles = new Obstacle[3];
 
         File.WriteAllText(filePath, JsonUtility.ToJson(stagesData, true));
-
         Debug.Log("Well... Everything went well! >> " + filePath);
     }
 
@@ -104,7 +83,7 @@ public class CreateObstacles_v2 : MonoBehaviour
 
     #endregion
 
-    #region >>> Stages Managing <<<
+    #region >>> Stages Management <<<
 
     public void ChooseRandomStage()
     {
@@ -126,7 +105,7 @@ public class CreateObstacles_v2 : MonoBehaviour
                 currentStageLenght = Random.Range(stagesData.stages[i].lenghtRange[0], stagesData.stages[i].lenghtRange[1]);
                 cooldowns = new int[stagesData.stages[i].obstacles.Length];
 
-                GameObject newStageSeparator = Instantiate(stageSeparator, new Vector3(0, -50, distanceInFront), Quaternion.identity);
+                GameObject newStageSeparator = Instantiate(stageSeparator, new Vector3(0, GameRules.bottomHeight, GameRules.obstacleSpawnDistance), Quaternion.identity);
                 string text = "";
                 for (int a = 0; a < 10; a++)
                 {

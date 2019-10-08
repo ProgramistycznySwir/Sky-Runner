@@ -2,22 +2,18 @@
 
 public class MoveTowardsPlayer : MonoBehaviour
 {
-    public Vector3 velocity;
-
-    private float dieAfterTravelling = 1200f;
-    private float startDistance;
-
+    private float dieBehind;
+    
     void Start()
     {
-        startDistance = transform.position.z;
+        dieBehind = GameRules.obstacleTerminationLine;
     }
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
-        //transform.Translate(velocity * Time.fixedDeltaTime);
-        transform.position += velocity * Time.fixedDeltaTime;
+        transform.position += new Vector3(0f, 0f, -GameRules.playerSpeed * Time.fixedDeltaTime);
 
-        if(transform.position.z + dieAfterTravelling < startDistance)
+        if(transform.position.z < dieBehind)
         {
             Destroy(gameObject);
         }

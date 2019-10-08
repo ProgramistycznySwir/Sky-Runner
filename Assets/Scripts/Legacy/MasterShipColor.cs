@@ -8,7 +8,7 @@ public class MasterShipColor : MonoBehaviour
     public Renderer[] hull;
     public TextMeshPro[] texts;
     public TrailRenderer[] trails;
-    
+
     void Start()
     {
         for(int a = 0; a < hull.Length; a++)

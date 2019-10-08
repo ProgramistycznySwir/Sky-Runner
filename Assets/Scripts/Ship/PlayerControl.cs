@@ -20,10 +20,12 @@ public class PlayerControl : MonoBehaviour
 
     bool enableStun = true; ///optimalisation snuff
         [Tooltip("Duration of stun (in frames)")]
-    public ushort stunThreshold = 5;
+    public ushort stunThreshold = 20;
     public ushort stun; //Current stun proggress
         [Tooltip("Limits the movement of ship on sides (Left, and Right)")]
-    public Vector2 limitHorizontalMovement = new Vector2(-240f, 240f);    
+    public Vector2 limitHorizontalMovement = new Vector2(-240f, 240f);
+
+    public int HP, maxHP, armor; //do tego jeszcze tarcze które się regenerują po przeleceniu bez uderzenia w nic przez: 500/1000/1500  metrów (po regeneracji licznik przeleconych metrów się zeruje i jest naliczany od nowa aka jeśli przelecisz 1000 metrów bez uderzenia niczego masz 1 tarczę i 500m na kosz drugiej)
 
         [Header("Keys:")]
     public KeyCode startRun = KeyCode.Space;
@@ -43,7 +45,8 @@ public class PlayerControl : MonoBehaviour
     int hitCount = 0;
     public TMPro.TextMeshPro hitCountText;
     public GameObject hitEffect;
-    public MasterShipColor masterShipColor;
+    public MasterShipColor masterShipColor; //Legacy
+    public DisplayStats displayStats;
     //PlayerControl playerControl;
     public Shield shieldOfShip;
 
@@ -60,13 +63,19 @@ public class PlayerControl : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         //Debug.Log( collider.name);
-        if (collider.tag != "Buff")
+        if (collider.tag != "Buff" && stun <= 0)
         {
             hitCount++;
             hitCountText.text = System.Convert.ToString(hitCount);
 
             Instantiate(hitEffect, transform.position + Vector3.forward * 10f, Quaternion.identity).GetComponent<Light>().color = masterShipColor.shipColor;
 
+            Stun();
+
+            if (armor > 0) armor--;
+            else if (HP > 0) HP--;
+
+            displayStats.UpdateStatus(HP, maxHP, armor, false, stun, stunThreshold);
             //collider.GetComponentInParent<Pillar>().Hit();
         }
     }
@@ -82,6 +91,10 @@ public class PlayerControl : MonoBehaviour
         {
             rigidbody = gameObject.GetComponent<Rigidbody>();
         }
+
+        HP = maxHP;
+
+        displayStats.UpdateStatus(HP, maxHP, armor, false, stun, stunThreshold);
         //playerControl = gameObject.GetComponent<PlayerControl>();
     }
 
@@ -158,7 +171,10 @@ public class PlayerControl : MonoBehaviour
         if (enableStun && stun > 0)
         {
             stun--;
+            displayStats.UpdateStatus(HP, maxHP, armor, false, stun, stunThreshold);
         }
+
+        
     }
 
     public void Stun()

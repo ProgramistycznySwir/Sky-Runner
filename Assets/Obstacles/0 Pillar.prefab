@@ -102,8 +102,9 @@ GameObject:
   - component: {fileID: 3053379117082316587}
   - component: {fileID: 6606979946258525014}
   - component: {fileID: 7796960461706468202}
+  - component: {fileID: 1665374195647300562}
   m_Layer: 0
-  m_Name: Pillar
+  m_Name: 0 Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,8 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e8e21d165903d438edd295f98f16f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: -100}
-  dieAfterTravelling: 750
 --- !u!114 &7796960461706468202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +151,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pillarDummy: {fileID: 8575875846272230360, guid: c99eb550be928d945b349d9b566451b6,
     type: 3}
+--- !u!114 &1665374195647300562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779168794129229567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869bd3b97959d514d839e037cb485377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
