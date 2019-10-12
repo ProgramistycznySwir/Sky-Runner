@@ -67295,8 +67295,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8541692280826057793, guid: 34dbc2e4f82d7284796f28ad4610a007,
         type: 3}
-      propertyPath: rollCamera
-      value: 0
+      propertyPath: armor
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8541692280826057793, guid: 34dbc2e4f82d7284796f28ad4610a007,
+        type: 3}
+      propertyPath: shield
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7162265392443167429, guid: 34dbc2e4f82d7284796f28ad4610a007,
         type: 3}
