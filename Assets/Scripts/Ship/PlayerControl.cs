@@ -7,10 +7,6 @@ public class PlayerControl : MonoBehaviour
     //public float rollDeadSpace = 0.1f;
     //public float rollingMaxAngle = 20f;
     //public float rollingSpeedPerSecond = 10f;
-
-    public float initialSpeed = 50f;
-    public float acceleration = 1f;
-    float runnerSpeed = 0f;
     
 
     float roll = 0f;
@@ -19,13 +15,13 @@ public class PlayerControl : MonoBehaviour
     public bool rollCamera = true;
 
     bool enableStun = true; ///optimalisation snuff
-        [Tooltip("Duration of stun (in frames)")]
-    public ushort stunThreshold = 20;
-    public ushort stun; //Current stun proggress
+    public int stun; //Current stun proggress
         [Tooltip("Limits the movement of ship on sides (Left, and Right)")]
     public Vector2 limitHorizontalMovement = new Vector2(-240f, 240f);
 
-    public int HP, maxHP, armor; //do tego jeszcze tarcze które się regenerują po przeleceniu bez uderzenia w nic przez: 500/1000/1500  metrów (po regeneracji licznik przeleconych metrów się zeruje i jest naliczany od nowa aka jeśli przelecisz 1000 metrów bez uderzenia niczego masz 1 tarczę i 500m na kosz drugiej)
+    public int HP, armor; //do tego jeszcze tarcze które się regenerują po przeleceniu bez uderzenia w nic przez: 500/1000/1500  metrów (po regeneracji licznik przeleconych metrów się zeruje i jest naliczany od nowa aka jeśli przelecisz 1000 metrów bez uderzenia niczego masz 1 tarczę i 500m na kosz drugiej)
+    public int shield;
+    public float distanceUntouched = 0;
 
         [Header("Keys:")]
     public KeyCode startRun = KeyCode.Space;
@@ -63,19 +59,28 @@ public class PlayerControl : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         //Debug.Log( collider.name);
-        if (collider.tag != "Buff" && stun <= 0)
+        if (collider.tag == "StageSeparator")
         {
+            Debug.Log("So i'm here");
+            Regenerate();
+            Stun();
+        }
+        else if (collider.tag != "Buff" && stun <= 0)
+        {
+            Debug.Log("So yet here");
             hitCount++;
             hitCountText.text = System.Convert.ToString(hitCount);
 
             Instantiate(hitEffect, transform.position + Vector3.forward * 10f, Quaternion.identity).GetComponent<Light>().color = masterShipColor.shipColor;
 
             Stun();
-
-            if (armor > 0) armor--;
+            if (shield > 0) shield--;
+            else if (armor > 0) armor--;
             else if (HP > 0) HP--;
+            
+            distanceUntouched = 0;
 
-            displayStats.UpdateStatus(HP, maxHP, armor, false, stun, stunThreshold);
+            displayStats.UpdateStatus(HP, armor, shield, stun, GameRules.playerStunFrames);
             //collider.GetComponentInParent<Pillar>().Hit();
         }
     }
@@ -83,7 +88,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(stunThreshold == 0) ///automatically sets enableStun to false if stunThreshold is equal to 0
+        if(GameRules.playerStunFrames == 0) ///automatically sets enableStun to false if GameRules.playerStunFrames is equal to 0
         {
             enableStun = false;
         }
@@ -92,9 +97,11 @@ public class PlayerControl : MonoBehaviour
             rigidbody = gameObject.GetComponent<Rigidbody>();
         }
 
-        HP = maxHP;
+        HP = GameRules.playerHPCap;
 
-        displayStats.UpdateStatus(HP, maxHP, armor, false, stun, stunThreshold);
+        distanceUntouched = -GameRules.obstacleSpawnDistance; //couse i want to it start counting only from start
+
+        displayStats.UpdateStatus(HP, armor, shield, stun, GameRules.playerStunFrames);
         //playerControl = gameObject.GetComponent<PlayerControl>();
     }
 
@@ -171,14 +178,33 @@ public class PlayerControl : MonoBehaviour
         if (enableStun && stun > 0)
         {
             stun--;
-            displayStats.UpdateStatus(HP, maxHP, armor, false, stun, stunThreshold);
+            displayStats.UpdateStatus(HP, armor, shield, stun, GameRules.playerStunFrames);
         }
 
+        CheckDistanceForShield();
         
+        displayStats.DisplayDistance((int)distanceUntouched, shield == GameRules.playerShieldCap);
+        
+        distanceUntouched += Time.fixedDeltaTime * GameRules.playerSpeed;
     }
 
     public void Stun()
     {
-        stun = stunThreshold;
+        stun = GameRules.playerStunFrames;
+    }
+    public void CheckDistanceForShield()
+    {
+        if(distanceUntouched >= GameRules.playerShieldDistancePerStack * (shield + 1) && shield < GameRules.playerShieldCap)
+        {
+            shield++;
+            distanceUntouched = 0;
+            displayStats.UpdateStatus(HP, armor, shield, stun, GameRules.playerStunFrames);
+        }
+    }
+    public void Regenerate()
+    {
+        if (HP < GameRules.playerHPCap) HP++;
+        else if (armor < GameRules.playerHardArmorCap) armor++;
+        else if (shield < GameRules.playerShieldCap) shield++;
     }
 }
