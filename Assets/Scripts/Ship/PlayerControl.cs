@@ -183,7 +183,7 @@ public class PlayerControl : MonoBehaviour
 
         CheckDistanceForShield();
         
-        displayStats.DisplayDistance((int)distanceUntouched, shield == GameRules.playerShieldCap);
+        displayStats.DisplayDistance((int)distanceUntouched, shield);
         
         distanceUntouched += Time.fixedDeltaTime * GameRules.playerSpeed;
     }

@@ -52,15 +52,15 @@ public class DisplayStats : MonoBehaviour
 
         statusText.text = text;
     }
-    public void DisplayDistance(int distanceUntouched, bool shieldsFull)
+    public void DisplayDistance(int distanceUntouched, int shieldsStacks)
     {
         //Debug.Log(distanceUntouched + " / " + GameRules._distanceTravelled);
-        if (GameRules._distanceTravelled < 0) distanceText.text = "Booting...";
+        if (GameRules._distanceTravelled < 0) distanceText.text = "ETA: " + (-GameRules._distanceTravelled / GameRules.playerSpeed) + "s";
         else
         {
             distanceText.text = ((int)GameRules._distanceTravelled).ToString();
-            if (shieldsFull) distanceUntouchedText.text = "Full";
-            else distanceUntouchedText.text = distanceUntouched.ToString();
+            if (shieldsStacks == GameRules.playerShieldCap) distanceUntouchedText.text = "Full";
+            else distanceUntouchedText.text = ((GameRules.playerShieldDistancePerStack * (shieldsStacks + 1)) - distanceUntouched).ToString();
         }
     }
 }

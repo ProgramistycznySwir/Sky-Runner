@@ -9,7 +9,7 @@ public struct Obstacle
 {
     public string name;
     public int ID;
-    public int cooldown;
+    public float distance;
     public bool varySize;
 }
 

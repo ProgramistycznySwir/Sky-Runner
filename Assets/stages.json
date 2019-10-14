@@ -7,7 +7,7 @@
                 {
                     "name": "Pillar",
                     "ID": 0,
-                    "cooldown": 4,
+                    "distance": 8.0,
                     "varySize": true
                 }
             ],
@@ -25,13 +25,13 @@
                 {
                     "name": "Pillar",
                     "ID": 0,
-                    "cooldown": 5,
+                    "distance": 10.0,
                     "varySize": true
                 },
                 {
                     "name": "Rotor",
                     "ID": 1,
-                    "cooldown": 20,
+                    "distance": 40.0,
                     "varySize": false
                 }
             ],
@@ -49,19 +49,19 @@
 				{
                     "name": "Pillar",
                     "ID": 0,
-                    "cooldown": 10,
+                    "distance": 20.0,
                     "varySize": true
                 },
 				{
                     "name": "Rotor",
                     "ID": 1,
-                    "cooldown": 25,
+                    "distance": 50.0,
                     "varySize": false
                 },
 				{
                     "name": "MonoBlade",
                     "ID": 2,
-                    "cooldown": 25,
+                    "distance": 50.0,
                     "varySize": false
                 }
 			],
@@ -79,7 +79,7 @@
 				{
                     "name": "CrystalSpike",
                     "ID": 3,
-                    "cooldown": 3,
+                    "distance": 6.0,
                     "varySize": true
                 }
 			],
@@ -97,13 +97,13 @@
 				{
                     "name": "Pillar",
                     "ID": 0,
-                    "cooldown": 10,
+                    "distance": 20.0,
                     "varySize": true
                 },
                 {
                     "name": "Marching Wall",
                     "ID": 6,
-                    "cooldown": 20,
+                    "distance": 60.0,
                     "varySize": true
                 }
 			],
@@ -121,7 +121,7 @@
 				{
                     "name": "CrimsonCube",
                     "ID": 4,
-                    "cooldown": 3,
+                    "distance": 6.0,
                     "varySize": true
                 }
 			],

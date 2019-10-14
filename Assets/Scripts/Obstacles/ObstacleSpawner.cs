@@ -5,7 +5,7 @@ public class ObstacleSpawner : MonoBehaviour
 {
     #region >>> Variables <<<
     
-    int[] cooldowns;
+    float[] distances;
 
     public float currentStageDistanceTravelled;
     public float currentStageLenght;
@@ -46,12 +46,12 @@ public class ObstacleSpawner : MonoBehaviour
     {
         for (int i = 0; i < currentStage.obstacles.Length; i++)
         {
-            if (cooldowns[i] <= 0)
+            while (distances[i] <= 0)
             {
                 GameObject newObstacle = Instantiate(obstacles[currentStage.obstacles[i].ID], new Vector3(Random.Range(GameRules.wallsPositions.x, GameRules.wallsPositions.y), 0, GameRules.obstacleSpawnDistance), Quaternion.identity);
-                cooldowns[i] = (int)((float)currentStage.obstacles[i].cooldown / GameRules.obstacleSpawnMultiplier);
+                distances[i] += currentStage.obstacles[i].distance / GameRules.obstacleSpawnMultiplier;
             }
-            else cooldowns[i]--;
+            distances[i] -= GameRules.playerSpeed * Time.deltaTime;
         }
         if (Input.GetKeyDown(KeyCode.Space)) ChooseRandomStage();
     }
@@ -107,7 +107,7 @@ public class ObstacleSpawner : MonoBehaviour
             {
                 currentStage = stagesData.stages[i];
                 currentStageLenght = Random.Range(stagesData.stages[i].lenghtRange[0], stagesData.stages[i].lenghtRange[1]);
-                cooldowns = new int[stagesData.stages[i].obstacles.Length];
+                distances = new float[stagesData.stages[i].obstacles.Length];
 
                 GameObject newStageSeparator = Instantiate(stageSeparator, new Vector3(0, GameRules.bottomHeight, GameRules.obstacleSpawnDistance), Quaternion.identity);
                 string text = "";

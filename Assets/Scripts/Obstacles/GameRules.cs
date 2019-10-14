@@ -59,7 +59,7 @@ public class GameRules : MonoBehaviour
     void FixedUpdate()
     {
         if (Input.GetKeyDown(reload)) LoadValues();
-        Debug.Log(_distanceTravelled);
+
         _distanceTravelled += playerSpeed * Time.fixedDeltaTime;
     }
 
