@@ -48,6 +48,8 @@ public class GameRules : MonoBehaviour
 
     public static float _distanceTravelled;
 
+    public const float acceleration = 1f;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,6 +63,8 @@ public class GameRules : MonoBehaviour
         if (Input.GetKeyDown(reload)) LoadValues();
 
         _distanceTravelled += playerSpeed * Time.fixedDeltaTime;
+
+        playerSpeed += acceleration * Time.fixedDeltaTime;
     }
 
     public void LoadValues()
