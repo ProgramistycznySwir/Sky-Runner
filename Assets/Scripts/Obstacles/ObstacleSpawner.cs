@@ -30,13 +30,9 @@ public class ObstacleSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float a = 0.2f, b = 0.1f;
-        float c = a + b;
-        Debug.Log(0.1f + 0.2f);
-
         Application.targetFrameRate = 60;
 
-        CreateTemplateFile();
+        //CreateTemplateFile();
         LoadData();
         ChooseRandomStage();
     }

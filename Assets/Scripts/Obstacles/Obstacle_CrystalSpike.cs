@@ -2,6 +2,8 @@
 
 public class Obstacle_CrystalSpike : MonoBehaviour
 {
+    public readonly Range spikeInclinationRange = new Range(-50f, 50f);
+
     public Renderer renderer;
     public Light light;
     // Start is called before the first frame update
@@ -13,7 +15,7 @@ public class Obstacle_CrystalSpike : MonoBehaviour
         color.a = 0.7f;
         renderer.material.color = color;
 
-        transform.eulerAngles = new Vector3(Random.Range(-50f, 50f), Random.Range(0f, 360f), 0);
+        transform.eulerAngles = new Vector3(spikeInclinationRange.Random, Random.Range(0f, 360f), 0);
 
         light.color = color;
         light.intensity = Random.Range(1f, 2f);
