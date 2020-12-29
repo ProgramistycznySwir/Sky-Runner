@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerControl : MonoBehaviour
 {
     public float horizontalForce = 50f; //300
@@ -7,7 +8,7 @@ public class PlayerControl : MonoBehaviour
     //public float rollDeadSpace = 0.1f;
     //public float rollingMaxAngle = 20f;
     //public float rollingSpeedPerSecond = 10f;
-    
+
 
     float roll = 0f;
 
@@ -17,7 +18,8 @@ public class PlayerControl : MonoBehaviour
     bool enableStun = true; ///optimalisation snuff
     public int stun; //Current stun proggress
         [Tooltip("Limits the movement of ship on sides (Left, and Right)")]
-    public Vector2 limitHorizontalMovement = new Vector2(-240f, 240f);
+    // public Vector2 limitHorizontalMovement = new Vector2(-240f, 240f);
+    public Range limitHorizontalMovement = new Range(-240f, 240f);
 
     public int HP, armor; //do tego jeszcze tarcze które się regenerują po przeleceniu bez uderzenia w nic przez: 500/1000/1500  metrów (po regeneracji licznik przeleconych metrów się zeruje i jest naliczany od nowa aka jeśli przelecisz 1000 metrów bez uderzenia niczego masz 1 tarczę i 500m na kosz drugiej)
     public int shield;
@@ -29,7 +31,8 @@ public class PlayerControl : MonoBehaviour
     public bool customControl = false;
     public KeyCode left = KeyCode.LeftArrow;
     public KeyCode right = KeyCode.RightArrow;
-    float horizontalMovementVar = 0f; //used when customControl enabled, causes smooth motion of ship
+    ValueInRange horizontalMovementVar = new ValueInRange(-1, 1, 0);
+    // float horizontalMovementVar = 0f; //used when customControl enabled, causes smooth motion of ship
         [Tooltip("Smaller the variable smoother the movement (default: 0.06)")]
     public float horizontalMovementSmoothness = 0.06f;
 
@@ -46,38 +49,31 @@ public class PlayerControl : MonoBehaviour
     //PlayerControl playerControl;
     public Shield shieldOfShip;
 
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    if(collision.collider.tag != "walls" || collision.collider.tag != "Buff")
-    //    {
-    //        rigidbody.drag = 0f;
-    //        rigidbody.angularDrag = 0f;
-    //        playerControl.enabled = false;
-    //    }
-    //}
-
     void OnTriggerEnter(Collider collider)
     {
         //Debug.Log( collider.name);
         if (collider.tag == "StageSeparator")
         {
-            Debug.Log("So i'm here");
+            // Debug.Log("So i'm here");
             Regenerate();
             Stun();
         }
         else if (collider.tag != "Buff" && stun <= 0)
         {
-            Debug.Log("So yet here");
+            // Debug.Log("So yet here");
             hitCount++;
             hitCountText.text = System.Convert.ToString(hitCount);
 
             Instantiate(hitEffect, transform.position + Vector3.forward * 10f, Quaternion.identity).GetComponent<Light>().color = masterShipColor.shipColor;
 
             Stun();
-            if (shield > 0) shield--;
-            else if (armor > 0) armor--;
-            else if (HP > 0) HP--;
-            
+            if (shield > 0)
+                shield--;
+            else if (armor > 0)
+                armor--;
+            else if (HP > 0)
+                HP--;
+
             distanceUntouched = 0;
 
             displayStats.UpdateStatus(HP, armor, shield, stun, GameRules.playerStunFrames);
@@ -88,14 +84,10 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody ??= gameObject.GetComponent<Rigidbody>();
+
         if(GameRules.playerStunFrames == 0) ///automatically sets enableStun to false if GameRules.playerStunFrames is equal to 0
-        {
             enableStun = false;
-        }
-        if(rigidbody == null)
-        {
-            rigidbody = gameObject.GetComponent<Rigidbody>();
-        }
 
         HP = GameRules.playerHPCap;
 
@@ -113,41 +105,38 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetKey(right))
             {
-                if (horizontalMovementVar < 0f) horizontalMovementVar = 0f;
-                else horizontalMovementVar += horizontalMovementSmoothness;
-                if (horizontalMovementVar > 1f)
-                {
-                    horizontalMovementVar = 1f;
-                }
+                horizontalMovementVar.MoveTowards(1f, horizontalMovementSmoothness);
+                // if (horizontalMovementVar < 0f)
+                //     horizontalMovementVar = 0f;
+                // else
+                //     horizontalMovementVar += horizontalMovementSmoothness;
+
+                // if (horizontalMovementVar > 1f)
+                //     horizontalMovementVar = 1f;
+            }
+            else if (Input.GetKey(left))
+            {
+                horizontalMovementVar.MoveTowards(-1f, horizontalMovementSmoothness);
+                // if (horizontalMovementVar > 0f)
+                //     horizontalMovementVar = 0f;
+                // else
+                //     horizontalMovementVar -= horizontalMovementSmoothness;
+
+                // if (horizontalMovementVar < -1f)
+                //     horizontalMovementVar = -1f;
             }
             else
             {
-                if (horizontalMovementVar > 0f)
-                {
-                    horizontalMovementVar -= horizontalMovementSmoothness;
-                }
+                horizontalMovementVar.MoveTowards(0, horizontalMovementSmoothness);
+                // if(horizontalMovementVar < 0)
+                // {
+                //     horizontalMovementVar += horizontalMovementSmoothness;
+                // }
             }
 
-            if (Input.GetKey(left))
-            {
-                if (horizontalMovementVar > 0f) horizontalMovementVar = 0f;
-                else horizontalMovementVar -= horizontalMovementSmoothness;
-                if (horizontalMovementVar < -1f)
-                {
-                    horizontalMovementVar = -1f;
-                }
-            }
-            else
-            {
-                if(horizontalMovementVar < 0)
-                {
-                    horizontalMovementVar += horizontalMovementSmoothness;
-                }                
-            }
+            // if (horizontalMovementVar < horizontalMovementSmoothness && horizontalMovementVar > -horizontalMovementSmoothness) horizontalMovementVar = 0f;
 
-            if (horizontalMovementVar < horizontalMovementSmoothness && horizontalMovementVar > -horizontalMovementSmoothness) horizontalMovementVar = 0f;
-
-            rigidbody.AddForce(new Vector3(horizontalMovementVar*horizontalForce, 0, 0));
+            rigidbody.AddForce(new Vector3(horizontalMovementVar * horizontalForce, 0, 0));
         }
         else rigidbody.AddForce(new Vector3(Input.GetAxis("Horizontal") * horizontalForce, 0, 0));
 
@@ -156,24 +145,21 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(rigidbody.velocity.x);
 
         if (rigidbody.velocity.x > maxHorizontalSpeed)
-        {
             rigidbody.velocity = new Vector3(maxHorizontalSpeed, 0, 0);
-        }
         else if (rigidbody.velocity.x < -maxHorizontalSpeed)
-        {
             rigidbody.velocity = new Vector3(-maxHorizontalSpeed, 0, 0);
-        }
 
         roll = -rigidbody.velocity.x * rollRatio;
         transform.eulerAngles = new Vector3(0, 0, roll);
 
-        if(rollCamera) camera.eulerAngles = new Vector3(0, -roll * 0.25f, 0);
+        if(rollCamera)
+            camera.eulerAngles = new Vector3(0, -roll * 0.25f, 0);
         #endregion
-        
 
-        //limits the movement of shit soo it don't touch boundaries, couse touching boundaries is no no
-        if (transform.position.x > limitHorizontalMovement.y) transform.position = new Vector3(limitHorizontalMovement.y, 0, transform.position.z);
-        else if (transform.position.x < limitHorizontalMovement.x) transform.position = new Vector3(limitHorizontalMovement.x, 0, transform.position.z);
+
+        // Limits the movement of shit soo it don't touch boundaries, couse touching boundaries is no no
+        if(!limitHorizontalMovement.IsInRange(transform.position.x))
+            transform.position = new Vector3(limitHorizontalMovement.Clamp(transform.position.x), 0, transform.position.z);
 
         if (enableStun && stun > 0)
         {
@@ -182,16 +168,14 @@ public class PlayerControl : MonoBehaviour
         }
 
         CheckDistanceForShield();
-        
+
         displayStats.DisplayDistance((int)distanceUntouched, shield);
-        
+
         distanceUntouched += Time.fixedDeltaTime * GameRules.playerSpeed;
     }
 
     public void Stun()
-    {
-        stun = GameRules.playerStunFrames;
-    }
+        { stun = GameRules.playerStunFrames; }
     public void CheckDistanceForShield()
     {
         if(distanceUntouched >= GameRules.playerShieldDistancePerStack * (shield + 1) && shield < GameRules.playerShieldCap)
@@ -203,8 +187,11 @@ public class PlayerControl : MonoBehaviour
     }
     public void Regenerate()
     {
-        if (HP < GameRules.playerHPCap) HP++;
-        else if (armor < GameRules.playerHardArmorCap) armor++;
-        else if (shield < GameRules.playerShieldCap) shield++;
+        if (HP < GameRules.playerHPCap)
+            HP++;
+        else if (armor < GameRules.playerHardArmorCap)
+            armor++;
+        else if (shield < GameRules.playerShieldCap)
+            shield++;
     }
 }

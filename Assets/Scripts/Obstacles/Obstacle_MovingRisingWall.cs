@@ -25,19 +25,13 @@ public class Obstacle_MovingRisingWall : MonoBehaviour
     {
         speed = Random.Range(speedRange.x, speedRange.y);
 
-
-
         float dirrectionInDegrees = Mathf.PI + (((Random.value) - 0.5f) * Mathf.PI * (dirrectionRange / 90)); //180 stopni to 1.5 * PI, dobrze wiedzieć, Daniel...
 
         float sin = Mathf.Sin(dirrectionInDegrees);
         float cos = Mathf.Cos(dirrectionInDegrees);
-
         movementVector = new Vector3(sin * speed, 0, cos * speed);
 
-
         transform.Rotate(Vector3.up, dirrectionInDegrees / Mathf.Deg2Rad);
-
-
 
         wallCycle = (25 / speed); //25 is wallSegmentLenght + single hole
 
@@ -60,14 +54,14 @@ public class Obstacle_MovingRisingWall : MonoBehaviour
 
         //    float sin1 = Mathf.Sin(dirrectionInDegrees1);
         //    float cos1 = Mathf.Cos(dirrectionInDegrees1);
-            
+
         //    Vector3 movementVector1 = new Vector3(sin1 * speed, 0, cos1 * speed);
-            
+
 
         //    Debug.DrawRay(Vector3.zero, movementVector0, Color.red);
         //    Debug.DrawRay(Vector3.zero, movementVector1, Color.blue);
         //}
-        
+
         ///moving whole stuff
         extender.position += movementVector * Time.fixedDeltaTime;
 
@@ -78,10 +72,11 @@ public class Obstacle_MovingRisingWall : MonoBehaviour
             {
                 halfCheck = false;
                 tailWallIndex--;
-                if (tailWallIndex < 0) tailWallIndex = walls.Length - 1;
+                if (tailWallIndex < 0)
+                    tailWallIndex = walls.Length - 1;
             }
 
-            walls[tailWallIndex].position -= new Vector3(0, (100 / (wallCycle / 2)) * Time.fixedDeltaTime, 0); //100 is wall height, might make customisable later
+            walls[tailWallIndex].position -= new Vector3(0, (100 / (wallCycle / 2)) * Time.fixedDeltaTime, 0); // 100 is wall height, might make customisable later
         }
         else
         {
@@ -91,10 +86,11 @@ public class Obstacle_MovingRisingWall : MonoBehaviour
                 walls[tailWallIndex].position = extender.position + new Vector3(0, -walls[tailWallIndex].localScale.y / 2, 0);
             }
 
-            walls[tailWallIndex].position += new Vector3(0, (100 / (wallCycle / 2)) * Time.fixedDeltaTime, 0); //100 is wall height, might make customisable later
+            walls[tailWallIndex].position += new Vector3(0, (100 / (wallCycle / 2)) * Time.fixedDeltaTime, 0); // 100 is wall height, might make customisable later
         }
 
-        if (wallCycleClock > wallCycle) wallCycleClock = 0;
+        if (wallCycleClock > wallCycle)
+            wallCycleClock = 0;
 
         wallCycleClock += Time.fixedDeltaTime;
     }

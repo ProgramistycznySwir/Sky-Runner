@@ -220,7 +220,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13378
+  m_Name: pb_Mesh15548
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -966,7 +966,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15352
+  m_Name: pb_Mesh-1486
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1218,7 +1218,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15490
+  m_Name: pb_Mesh-1636
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1727,7 +1727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &834334078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10334,7 +10334,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15350
+  m_Name: pb_Mesh-1484
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11009,19 +11009,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f558438d730ee743bb4bd722cc27da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottomHeight_: -50
-  wallsPositions_: {x: -250, y: 250}
-  playerSpeed_: 100
-  obstacleSpawnMultiplier_: 1
-  obstacleTerminationLine_: -500
-  obstacleSpawnDistance_: 1100
-  numberOfPlayers_: 1
-  playerHPCap_: 5
-  playerSoftArmorCap_: 3
-  playerHardArmorCap_: 5
-  playerShieldCap_: 3
-  playerShieldDistancePerStack_: 500
-  playerStunFrames_: 20
+  bottomHeight__: -50
+  wallsPositions__: {x: -250, y: 250}
+  playerSpeed__: 100
+  obstacleSpawnMultiplier__: 1
+  obstacleTerminationLine__: -200
+  obstacleSpawnDistance__: 1100
+  numberOfPlayers__: 1
+  playerHPCap__: 5
+  playerSoftArmorCap__: 3
+  playerHardArmorCap__: 5
+  playerShieldCap__: 3
+  playerShieldDistancePerStack__: 500
+  playerStunFrames__: 20
   reload: 113
 --- !u!43 &1922397153
 Mesh:
@@ -11029,7 +11029,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15492
+  m_Name: pb_Mesh-1638
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

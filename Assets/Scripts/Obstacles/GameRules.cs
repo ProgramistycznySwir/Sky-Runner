@@ -14,7 +14,7 @@ public class GameRules : MonoBehaviour
     public static float obstacleTerminationLine;
     public static float obstacleSpawnDistance;
 
-    public static int numberOfPlayers;
+    private static int numberOfPlayers;
 
     public static int playerHPCap;
     public static int playerSoftArmorCap;
@@ -25,28 +25,29 @@ public class GameRules : MonoBehaviour
     #endregion
 
     [Header("Gamerules:")]
-    public float bottomHeight_ = 0f;
-    public Vector2 wallsPositions_ = new Vector2(-250f, 250f);
-    public float playerSpeed_ = 100;
-    public float obstacleSpawnMultiplier_ = 1f;
+    public float bottomHeight__ = 0f;
+    public Vector2 wallsPositions__ = new Vector2(-250f, 250f);
+    public float playerSpeed__ = 100;
+    public float obstacleSpawnMultiplier__ = 1f;
     [Tooltip("The z coordinate after which all obstacles are terminated (note that variable is set at Start() of obstacle and is not changed after that)")]
-    public float obstacleTerminationLine_ = -500f;
+    public float obstacleTerminationLine__ = -500f;
     [Tooltip("Distance at which obstacles are spawned")]
-    public float obstacleSpawnDistance_ = 1100f;
-    public int numberOfPlayers_ = 1;
+    public float obstacleSpawnDistance__ = 1100f;
+    public int numberOfPlayers__ = 1;
 
-    public int playerHPCap_ = 5;
-    public int playerSoftArmorCap_ = 3;
-    public int playerHardArmorCap_ = 5;
-    public int playerShieldCap_ = 3;
+    public int playerHPCap__ = 5;
+    public int playerSoftArmorCap__ = 3;
+    public int playerHardArmorCap__ = 5;
+    public int playerShieldCap__ = 3;
     [Tooltip("How far ship has to fly untouched to gain one shield stack")]
-    public float playerShieldDistancePerStack_ = 500;
-    public int playerStunFrames_ = 20;
+    public float playerShieldDistancePerStack__ = 500;
+    public int playerStunFrames__ = 20;
 
     [Tooltip("Temporary key used to test new GameRules valuse")]
     public KeyCode reload = KeyCode.Q;
 
-    public static float _distanceTravelled;
+    static float __distanceTravelled;
+    public static float distanceTravelled => __distanceTravelled;
 
     public const float acceleration = 1f;
 
@@ -54,33 +55,35 @@ public class GameRules : MonoBehaviour
     void Awake()
     {
         LoadValues();
-        _distanceTravelled = (int)-obstacleSpawnDistance_;
+        __distanceTravelled = (int)-obstacleSpawnDistance__;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(reload)) LoadValues();
+        //<NOTE_DEBUG> It's for debug.
+        if (Input.GetKeyDown(reload))
+            LoadValues();
 
-        _distanceTravelled += playerSpeed * Time.fixedDeltaTime;
+        __distanceTravelled += playerSpeed * Time.fixedDeltaTime;
 
         playerSpeed += acceleration * Time.fixedDeltaTime;
     }
 
     public void LoadValues()
     {
-        bottomHeight = bottomHeight_;
-        wallsPositions = wallsPositions_;
-        playerSpeed = playerSpeed_;
-        obstacleSpawnMultiplier = obstacleSpawnMultiplier_;
-        obstacleTerminationLine = obstacleTerminationLine_;
-        obstacleSpawnDistance = obstacleSpawnDistance_;
-        numberOfPlayers = numberOfPlayers_;
-        playerHPCap = playerHPCap_;
-        playerSoftArmorCap = playerHardArmorCap_;
-        playerHardArmorCap = playerHardArmorCap_;
-        playerShieldCap = playerShieldCap_;
-        playerShieldDistancePerStack = playerShieldDistancePerStack_;
-        playerStunFrames = playerStunFrames_;
+        bottomHeight = bottomHeight__;
+        wallsPositions = wallsPositions__;
+        playerSpeed = playerSpeed__;
+        obstacleSpawnMultiplier = obstacleSpawnMultiplier__;
+        obstacleTerminationLine = obstacleTerminationLine__;
+        obstacleSpawnDistance = obstacleSpawnDistance__;
+        numberOfPlayers = numberOfPlayers__;
+        playerHPCap = playerHPCap__;
+        playerSoftArmorCap = playerHardArmorCap__;
+        playerHardArmorCap = playerHardArmorCap__;
+        playerShieldCap = playerShieldCap__;
+        playerShieldDistancePerStack = playerShieldDistancePerStack__;
+        playerStunFrames = playerStunFrames__;
     }
 }

@@ -4,7 +4,7 @@ using System.IO;
 public class ObstacleSpawner : MonoBehaviour
 {
     #region >>> Variables <<<
-    
+
     float[] distances;
 
     public float currentStageDistanceTravelled;
@@ -49,7 +49,8 @@ public class ObstacleSpawner : MonoBehaviour
             }
             distances[i] -= GameRules.playerSpeed * Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.Space)) ChooseRandomStage();
+        if (Input.GetKeyDown(KeyCode.Space))
+            ChooseRandomStage();
     }
 
     #endregion
@@ -71,7 +72,8 @@ public class ObstacleSpawner : MonoBehaviour
     public void LoadData()
     {
         string filePath = Path.Combine(Application.dataPath, stagesDataFileName);
-        if (!File.Exists(filePath)) { Debug.LogError("File at " + filePath + " Doesn't exist..."); return; } //catches Unexisting File Exception
+        if (!File.Exists(filePath))
+            { Debug.LogError("File at " + filePath + " Doesn't exist..."); return; } //catches Unexisting File Exception
 
         string fileData = File.ReadAllText(filePath);
         StagesData stagesDataTemp = JsonUtility.FromJson<StagesData>(fileData);
@@ -91,9 +93,7 @@ public class ObstacleSpawner : MonoBehaviour
         int previousChances = 0;
 
         foreach (Stage stage in stagesData.stages)
-        {
             sumOfChances += stage.chanceOccuring;
-        }
 
         int randomNumber = Random.Range(0, sumOfChances);
 
@@ -107,10 +107,8 @@ public class ObstacleSpawner : MonoBehaviour
 
                 GameObject newStageSeparator = Instantiate(stageSeparator, new Vector3(0, GameRules.bottomHeight, GameRules.obstacleSpawnDistance), Quaternion.identity);
                 string text = "";
-                for (int a = 0; a < 10; a++)
-                {
-                    text += "  " + currentStage.name + "  ";
-                }
+                for (int a = 0; a < 9; a++)
+                    text += $"  {currentStage.name}  ";
                 newStageSeparator.GetComponentInChildren<TMPro.TextMeshPro>().text = text;
 
                 SetLightning();
@@ -118,7 +116,8 @@ public class ObstacleSpawner : MonoBehaviour
                 Debug.Log("Chosen stage: " + currentStage.name);
                 return;
             }
-            else previousChances += stagesData.stages[i].chanceOccuring;
+            else
+                previousChances += stagesData.stages[i].chanceOccuring;
         }
 
         Debug.LogError("Failed to choose stage..."); //method should return void to this point, should

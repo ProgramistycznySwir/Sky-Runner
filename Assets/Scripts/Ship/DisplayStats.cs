@@ -20,47 +20,61 @@ public class DisplayStats : MonoBehaviour
     {
         string text = "";
 
-        if (HP == GameRules.playerHPCap) ;
-        else if ((float)HP / GameRules.playerHPCap > 0.75f) text += "<color=\"green\">";
-        else if ((float)HP / GameRules.playerHPCap > 0.4f) text += "<color=\"yellow\">";
-        else  text += "<color=\"red\">";
-
-        for(int i = 0; i < HP; i++)
-        {
-            text += "A"; //Symbol of cube (health)
-        }
-        if(HP != GameRules.playerHPCap) text += "</color>";
+        text += WriteHPStatus(HP, GameRules.playerHPCap);
 
         for (int i = 0; i < armor; i++)
         {
-            if (i == 3) text += "<color=\"purple\">";
+            if (i == 3)
+                text += "<color=\"purple\">";
             text += "H"; //Symbol of shield (armor)
         }
-        if (armor > 3) text += "</color>";
+        if (armor > 3)
+            text += "</color>";
 
-        for(int i = 0; i < shield; i++)
-        {
-            text += "E"; //Symbol of ring (shield)
-        }
+        text += new System.String('E',  shield); //Symbol of ring (shield)
 
         if (stun > 0)
         {
             text += "<alpha=#" + ((int)(((float)stun / maxStun) * 256)).ToString("X") + ">";
             text += "C"; //Symbol of star
-        }        
+        }
 
 
         statusText.text = text;
     }
+
     public void DisplayDistance(int distanceUntouched, int shieldsStacks)
     {
-        //Debug.Log(distanceUntouched + " / " + GameRules._distanceTravelled);
-        if (GameRules._distanceTravelled < 0) distanceText.text = "ETA: " + (-GameRules._distanceTravelled / GameRules.playerSpeed) + "s";
+        if (GameRules.distanceTravelled < 0)
+            distanceText.text = $"ETA: {(-GameRules.distanceTravelled / GameRules.playerSpeed).ToString("F0")}s";
         else
         {
-            distanceText.text = ((int)GameRules._distanceTravelled).ToString();
-            if (shieldsStacks == GameRules.playerShieldCap) distanceUntouchedText.text = "Full";
-            else distanceUntouchedText.text = ((GameRules.playerShieldDistancePerStack * (shieldsStacks + 1)) - distanceUntouched).ToString();
+            distanceText.text = ((int)GameRules.distanceTravelled).ToString();
+            if (shieldsStacks == GameRules.playerShieldCap)
+                distanceUntouchedText.text = "Full";
+            else
+                distanceUntouchedText.text = ((GameRules.playerShieldDistancePerStack * (shieldsStacks + 1)) - distanceUntouched).ToString();
         }
+    }
+
+    public string WriteHPStatus(int HP, int maxHP)
+    {
+        string text = "";
+
+        if (HP == maxHP)
+            ;
+        else if ((float)HP / maxHP > 0.75f)
+            text += "<color=\"green\">";
+        else if ((float)HP / maxHP > 0.4f)
+            text += "<color=\"yellow\">";
+        else
+            text += "<color=\"red\">";
+
+        text += new System.String('A', HP); //Symbol of cube (health)
+
+        if(HP != maxHP)
+            text += "</color>";
+
+        return text;
     }
 }
