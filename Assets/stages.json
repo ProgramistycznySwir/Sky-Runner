@@ -115,6 +115,24 @@
             "lenghtRange": [3000.0, 5000.0]
         },
 		{
+            "name": "Chalk Mines",
+            "chanceOccuring": 3,
+            "obstacles": [
+				{
+                    "name": "ChalkSpike",
+                    "ID": 7,
+                    "distance": 3.0,
+                    "varySize": true
+                }
+			],
+			"lightData": {
+                "sunLightIntensity": 0.0,
+                "sunLightColor": [1.0, 0.9892683, 0.96],
+                "ambientIntensity": 0.0
+            },
+            "lenghtRange": [3000.0, 5000.0]
+        },
+		{
             "name": "Crimson",
             "chanceOccuring": 0,
             "obstacles": [

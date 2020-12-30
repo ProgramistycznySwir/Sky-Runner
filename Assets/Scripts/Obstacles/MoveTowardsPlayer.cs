@@ -13,8 +13,8 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        // transform.position += new Vector3(0f, 0f, -GameRules.playerSpeed * Time.fixedDeltaTime);
-        transform.Translate(new Vector3(0f, 0f, -GameRules.playerSpeed * Time.fixedDeltaTime));
+        transform.position += new Vector3(0f, 0f, -GameRules.playerSpeed * Time.fixedDeltaTime);
+        // transform.Translate(new Vector3(0f, 0f, -GameRules.playerSpeed * Time.fixedDeltaTime));
 
         if(transform.position.z < dieBehind)
         {
