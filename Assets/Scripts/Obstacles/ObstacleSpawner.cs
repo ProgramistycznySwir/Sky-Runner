@@ -44,7 +44,7 @@ public class ObstacleSpawner : MonoBehaviour
         {
             while (distances[i] <= 0)
             {
-                GameObject newObstacle = Instantiate(obstacles[currentStage.obstacles[i].ID], new Vector3(Random.Range(GameRules.wallsPositions.x, GameRules.wallsPositions.y), 0, GameRules.obstacleSpawnDistance), Quaternion.identity);
+                GameObject newObstacle = Instantiate(obstacles[currentStage.obstacles[i].ID], new Vector3(GameRules.wallsPositions.Random, 0, GameRules.obstacleSpawnDistance), Quaternion.identity);
                 distances[i] += currentStage.obstacles[i].distance / GameRules.obstacleSpawnMultiplier;
             }
             distances[i] -= GameRules.playerSpeed * Time.deltaTime;
@@ -63,7 +63,7 @@ public class ObstacleSpawner : MonoBehaviour
 
         StagesData stagesData = new StagesData();
         stagesData.stages = new Stage[4];
-        stagesData.stages[0].obstacles = new Obstacle[3];
+        stagesData.stages[0].obstacles = new ObstacleData[3];
 
         File.WriteAllText(filePath, JsonUtility.ToJson(stagesData, true));
         Debug.Log("Well... Everything went well! >> " + filePath);

@@ -5,7 +5,7 @@ public class StagesData
 }
 
 [System.Serializable]
-public struct Obstacle
+public struct ObstacleData
 {
     public string name;
     public int ID;
@@ -18,7 +18,7 @@ public struct Stage
 {
     public string name;
     public int chanceOccuring;
-    public Obstacle[] obstacles;
+    public ObstacleData[] obstacles;
     public LightData lightData;
     public float[] lenghtRange;
 }

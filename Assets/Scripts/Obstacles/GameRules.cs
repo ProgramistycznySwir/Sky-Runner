@@ -8,7 +8,7 @@ public class GameRules : MonoBehaviour
 {
     #region >>> Statics <<<
     public static float bottomHeight;
-    public static Vector2 wallsPositions;
+    public static Range wallsPositions;
     public static float playerSpeed;
     public static float obstacleSpawnMultiplier;
     public static float obstacleTerminationLine;
@@ -26,7 +26,7 @@ public class GameRules : MonoBehaviour
 
     [Header("Gamerules:")]
     public float bottomHeight__ = 0f;
-    public Vector2 wallsPositions__ = new Vector2(-250f, 250f);
+    public Range wallsPositions__ = new Range(-250f, 250f);
     public float playerSpeed__ = 100;
     public float obstacleSpawnMultiplier__ = 1f;
     [Tooltip("The z coordinate after which all obstacles are terminated (note that variable is set at Start() of obstacle and is not changed after that)")]

@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour
     public int stun; //Current stun proggress
         [Tooltip("Limits the movement of ship on sides (Left, and Right)")]
     // public Vector2 limitHorizontalMovement = new Vector2(-240f, 240f);
-    public Range limitHorizontalMovement = new Range(-240f, 240f);
+    public Range limitHorizontalMovement;
 
     public int HP, armor; //do tego jeszcze tarcze które się regenerują po przeleceniu bez uderzenia w nic przez: 500/1000/1500  metrów (po regeneracji licznik przeleconych metrów się zeruje i jest naliczany od nowa aka jeśli przelecisz 1000 metrów bez uderzenia niczego masz 1 tarczę i 500m na kosz drugiej)
     public int shield;
@@ -84,7 +84,12 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody ??= gameObject.GetComponent<Rigidbody>();
+        if(rigidbody == null)
+            rigidbody = gameObject.GetComponent<Rigidbody>();
+        // rigidbody ??= gameObject.GetComponent<Rigidbody>();
+
+        limitHorizontalMovement.min = GameRules.wallsPositions.min + 10f;
+        limitHorizontalMovement.max = GameRules.wallsPositions.max - 10f;
 
         if(GameRules.playerStunFrames == 0) ///automatically sets enableStun to false if GameRules.playerStunFrames is equal to 0
             enableStun = false;
