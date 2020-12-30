@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Obstacle_MovingRisingWall : MonoBehaviour
+public class Obstacle_MovingRisingWall : SpawnableObject
 {
     private Vector3 movementVector;
     //private float sin;
@@ -21,8 +21,10 @@ public class Obstacle_MovingRisingWall : MonoBehaviour
     //public float TESTadd; //pamiątka...
 
 
-    void Start()
+    public override void Set(int ID)
     {
+        base.Set(ID);
+
         speed = Random.Range(speedRange.x, speedRange.y);
 
         float dirrectionInDegrees = Mathf.PI + (((Random.value) - 0.5f) * Mathf.PI * (dirrectionRange / 90)); //180 stopni to 1.5 * PI, dobrze wiedzieć, Daniel...

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
-public class Obstacle_Rotor : MonoBehaviour
+public class Obstacle_Rotor : SpawnableObject
 {
     public float rpm = 60;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void Set(int ID)
     {
+        base.Set(ID);
+
         transform.position += Vector3.up * GameRules.bottomHeight;
         transform.Rotate(Vector3.forward * Random.Range(0, 90f));
     }

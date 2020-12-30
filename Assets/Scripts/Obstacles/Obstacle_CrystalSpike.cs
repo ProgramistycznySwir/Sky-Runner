@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Obstacle_CrystalSpike : MonoBehaviour
+public class Obstacle_CrystalSpike : SpawnableObject
 {
     //<NOTE> It's hardcoded here, you can parametrize it later.
     public readonly Range spikeInclinationRange = new Range(-50f, 50f);
@@ -10,8 +10,10 @@ public class Obstacle_CrystalSpike : MonoBehaviour
     public new Renderer renderer;
     public new Light light;
     // Start is called before the first frame update
-    void Start()
+    public override void Set(int ID)
     {
+        base.Set(ID);
+
         transform.position += Vector3.up * (GameRules.bottomHeight - 5);
 
         Color color = Color.HSVToRGB(Random.value, 1, 1);
