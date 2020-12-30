@@ -662,7 +662,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4882186957815992215}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &2575943615273622946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,7 +1521,9 @@ MonoBehaviour:
   rollRatio: 0.6
   rollCamera: 1
   stun: 0
-  limitHorizontalMovement: {x: -240, y: 240}
+  limitHorizontalMovement:
+    min: 0
+    max: 0
   HP: 0
   armor: 0
   shield: 0

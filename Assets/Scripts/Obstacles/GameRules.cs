@@ -6,22 +6,30 @@ using UnityEngine;
 /// </summary>
 public class GameRules : MonoBehaviour
 {
+    // Unity specific singleton.
+    static GameRules instance;
+    void Awake()
+    {
+        instance = this;
+        __distanceTravelled = (int)-obstacleSpawnDistance__;
+    }
+
     #region >>> Statics <<<
-    public static float bottomHeight;
-    public static Range wallsPositions;
-    public static float playerSpeed;
-    public static float obstacleSpawnMultiplier;
-    public static float obstacleTerminationLine;
-    public static float obstacleSpawnDistance;
+    public static float bottomHeight => instance.bottomHeight__;
+    public static Range wallsPositions => instance.wallsPositions__;
+    public static float playerSpeed => instance.playerSpeed__;
+    public static float obstacleSpawnMultiplier => instance.obstacleSpawnMultiplier__;
+    public static float obstacleTerminationLine => instance.obstacleTerminationLine__;
+    public static float obstacleSpawnDistance => instance.obstacleSpawnDistance__;
 
-    private static int numberOfPlayers;
+    private static int numberOfPlayers => instance.numberOfPlayers__;
 
-    public static int playerHPCap;
-    public static int playerSoftArmorCap;
-    public static int playerHardArmorCap;
-    public static int playerShieldCap;
-    public static float playerShieldDistancePerStack;
-    public static int playerStunFrames;
+    public static int playerHPCap => instance.playerHPCap__;
+    public static int playerSoftArmorCap => instance.playerSoftArmorCap__;
+    public static int playerHardArmorCap => instance.playerHardArmorCap__;
+    public static int playerShieldCap => instance.playerShieldCap__;
+    public static float playerShieldDistancePerStack => instance.playerShieldDistancePerStack__;
+    public static int playerStunFrames => instance.playerStunFrames__;
     #endregion
 
     [Header("Gamerules:")]
@@ -51,39 +59,12 @@ public class GameRules : MonoBehaviour
 
     public const float acceleration = 1f;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        LoadValues();
-        __distanceTravelled = (int)-obstacleSpawnDistance__;
-    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //<NOTE_DEBUG> It's for debug.
-        if (Input.GetKeyDown(reload))
-            LoadValues();
-
         __distanceTravelled += playerSpeed * Time.fixedDeltaTime;
 
-        playerSpeed += acceleration * Time.fixedDeltaTime;
-    }
-
-    public void LoadValues()
-    {
-        bottomHeight = bottomHeight__;
-        wallsPositions = wallsPositions__;
-        playerSpeed = playerSpeed__;
-        obstacleSpawnMultiplier = obstacleSpawnMultiplier__;
-        obstacleTerminationLine = obstacleTerminationLine__;
-        obstacleSpawnDistance = obstacleSpawnDistance__;
-        numberOfPlayers = numberOfPlayers__;
-        playerHPCap = playerHPCap__;
-        playerSoftArmorCap = playerHardArmorCap__;
-        playerHardArmorCap = playerHardArmorCap__;
-        playerShieldCap = playerShieldCap__;
-        playerShieldDistancePerStack = playerShieldDistancePerStack__;
-        playerStunFrames = playerStunFrames__;
+        playerSpeed__ += acceleration * Time.fixedDeltaTime;
     }
 }

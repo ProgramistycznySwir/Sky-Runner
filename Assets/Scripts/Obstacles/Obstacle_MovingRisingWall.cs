@@ -25,6 +25,9 @@ public class Obstacle_MovingRisingWall : SpawnableObject
     {
         base.Set(ID);
 
+        //<NOTE> Obstacle_RisingWall somewhat needs to be spawned at 0, that will be the problem.
+        transform.position = new Vector3(GameRules.wallsPositions.Random, 0, GameRules.obstacleSpawnDistance);
+
         speed = Random.Range(speedRange.x, speedRange.y);
 
         float dirrectionInDegrees = Mathf.PI + (((Random.value) - 0.5f) * Mathf.PI * (dirrectionRange / 90)); //180 stopni to 1.5 * PI, dobrze wiedzieć, Daniel...

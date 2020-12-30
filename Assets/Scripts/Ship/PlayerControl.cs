@@ -110,6 +110,8 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetKey(right))
             {
+                if(horizontalMovementVar < 0)
+                    horizontalMovementVar.value = 0;
                 horizontalMovementVar.MoveTowards(1f, horizontalMovementSmoothness);
                 // if (horizontalMovementVar < 0f)
                 //     horizontalMovementVar = 0f;
@@ -121,6 +123,8 @@ public class PlayerControl : MonoBehaviour
             }
             else if (Input.GetKey(left))
             {
+                if(horizontalMovementVar > 0)
+                    horizontalMovementVar.value = 0;
                 horizontalMovementVar.MoveTowards(-1f, horizontalMovementSmoothness);
                 // if (horizontalMovementVar > 0f)
                 //     horizontalMovementVar = 0f;

@@ -10929,6 +10929,7 @@ GameObject:
   - component: {fileID: 1748881101}
   - component: {fileID: 1748881100}
   - component: {fileID: 1748881097}
+  - component: {fileID: 1748881099}
   m_Layer: 9
   m_Name: GameMaster
   m_TagString: Untagged
@@ -10970,6 +10971,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1748881099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748881096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadcfa795cf04df46b3aef42e9034f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 6779168794129229567, guid: c6d7f4cc304cf1943a9335c2f50e76fa, type: 3}
+  - {fileID: 3897570577412456469, guid: ab0cd7d4afb19634095cce710e1db328, type: 3}
+  - {fileID: 3897570577412456469, guid: c103b741b94ebcc4a8c99cfe26e3e0e5, type: 3}
+  - {fileID: 6638143916096828850, guid: e5c0575d3452d284ea3a2f77d1972120, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 5608401291964573903, guid: b94f13e7c32173c4bb26dccbc6eeaf22, type: 3}
 --- !u!114 &1748881100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10985,14 +11006,6 @@ MonoBehaviour:
   currentStageDistanceTravelled: 0
   currentStageLenght: 0
   sun: {fileID: 705507994}
-  obstacles:
-  - {fileID: 6779168794129229567, guid: c6d7f4cc304cf1943a9335c2f50e76fa, type: 3}
-  - {fileID: 3897570577412456469, guid: ab0cd7d4afb19634095cce710e1db328, type: 3}
-  - {fileID: 3897570577412456469, guid: c103b741b94ebcc4a8c99cfe26e3e0e5, type: 3}
-  - {fileID: 6638143916096828850, guid: e5c0575d3452d284ea3a2f77d1972120, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 5608401291964573903, guid: b94f13e7c32173c4bb26dccbc6eeaf22, type: 3}
   stageSeparator: {fileID: 588761546660491329, guid: 6b90705613c0881488b5b05f1d062e11,
     type: 3}
   buffs: []

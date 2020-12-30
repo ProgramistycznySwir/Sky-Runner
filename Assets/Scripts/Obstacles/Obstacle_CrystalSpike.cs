@@ -14,7 +14,7 @@ public class Obstacle_CrystalSpike : SpawnableObject
     {
         base.Set(ID);
 
-        transform.position += Vector3.up * (GameRules.bottomHeight - 5);
+        transform.position = new Vector3(GameRules.wallsPositions.Random, (GameRules.bottomHeight - 5), GameRules.obstacleSpawnDistance);
 
         Color color = Color.HSVToRGB(Random.value, 1, 1);
         color.a = spikeOpacityRange.Random;
@@ -25,7 +25,5 @@ public class Obstacle_CrystalSpike : SpawnableObject
         light.color = color;
         //<NOTE> It's hardcoded here, you can parametrize it later.
         light.intensity = Random.Range(1f, 2f);
-
-        Destroy(this);
     }
 }

@@ -13,7 +13,6 @@ public class ObstacleSpawner : MonoBehaviour
     [Header("Sockets:")]
     //public Transform player;
     public Light sun;
-    public GameObject[] obstacles;
     public GameObject stageSeparator;
     [Tooltip("NOT IMPLEMENTED")]
     public GameObject[] buffs;
@@ -44,10 +43,11 @@ public class ObstacleSpawner : MonoBehaviour
         {
             while (distances[i] <= 0)
             {
-                GameObject newObstacle = Instantiate(obstacles[currentStage.obstacles[i].ID], new Vector3(GameRules.wallsPositions.Random, 0, GameRules.obstacleSpawnDistance), Quaternion.identity);
+                ObstacleManager.Get(currentStage.obstacles[i].ID).Set(currentStage.obstacles[i].ID);
+                // GameObject newObstacle = Instantiate(obstacles[currentStage.obstacles[i].ID], new Vector3(GameRules.wallsPositions.Random, 0, GameRules.obstacleSpawnDistance), Quaternion.identity);
                 distances[i] += currentStage.obstacles[i].distance / GameRules.obstacleSpawnMultiplier;
             }
-            distances[i] -= GameRules.playerSpeed * Time.deltaTime;
+            distances[i] -= GameRules.playerSpeed * Time.fixedDeltaTime;
         }
         if (Input.GetKeyDown(KeyCode.Space))
             ChooseRandomStage();
@@ -120,7 +120,7 @@ public class ObstacleSpawner : MonoBehaviour
                 previousChances += stagesData.stages[i].chanceOccuring;
         }
 
-        Debug.LogError("Failed to choose stage..."); //method should return void to this point, should
+        Debug.LogError("Failed to choose stage..."); // Method should return void to this point, should atleast...
     }
 
     public void SetLightning()
